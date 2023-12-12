@@ -1,0 +1,15 @@
+---
+# Docker outside of docker
+
+version: '3.7'
+
+services:
+  app:
+    image: ${DOCKER_HUB_REPO}
+    container_name: app-${BUILD_ID}
+    user: "${UIDGID}"
+    env_file: ../.env
+    working_dir: /opt/app
+    volumes:
+      - ..:/opt/app
+      - /var/run/docker.sock:/var/run/docker.sock
